@@ -75,11 +75,11 @@ public class ControllerOne {
         String DB_PASSWORD = "password";
         String TABLE_NAME = "bk_time_log";
         serviceOne.createBkTable(DB_DRIVER,DB_CONNECTION,DB_USER,DB_PASSWORD,TABLE_NAME);
-        return "{status : true}";
+        return "Status : true";
     }
 
-    @RequestMapping(method = RequestMethod.GET,value="")
+    @RequestMapping(method = RequestMethod.GET,value="/connectiontest")
     public String  connectiontest(){
-        return "{ message : \"connection ok\" }";
+        return "connection working";
     }
 }
