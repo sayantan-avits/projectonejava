@@ -13,7 +13,7 @@ import java.util.List;
 import static com.example.projectone.Constants.*;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("bkdata")
 @CrossOrigin(origins = "*")
 public class ControllerOne {
 
@@ -23,7 +23,7 @@ public class ControllerOne {
 //    @Autowired
 //    IBkTimeRepository iBkTimeRepository;
 
-    @RequestMapping(method = RequestMethod.GET,value="bkdata/save")
+    @RequestMapping(method = RequestMethod.GET,value="/save")
     public String get(
             @RequestParam(value="RQSTTYPE", required=true) String reqstype,
             @RequestParam(value="PRODID", required=true) String prodid,
@@ -63,7 +63,7 @@ public class ControllerOne {
         s= s+"d";
     }
 
-    @RequestMapping(method = RequestMethod.GET,value="bkdata/getdata")
+    @RequestMapping(method = RequestMethod.GET,value="/getdata")
     public List<BkTimeLogModel> getbkdata(){
         return serviceOne.getbkData();
     }
