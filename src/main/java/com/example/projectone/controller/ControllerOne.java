@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,7 @@ public class ControllerOne {
     ServiceOne serviceOne;
 
 //    @Autowired
-//    IBkTimeRepository iBkTimeRepository;
+//    BkTimeLogRepository iBkTimeRepository;
 
     @RequestMapping(method = RequestMethod.GET,value="/save")
     public String get(
@@ -66,6 +67,12 @@ public class ControllerOne {
     @RequestMapping(method = RequestMethod.GET,value="/getdata")
     public List<BkTimeLogModel> getbkdata(){
         return serviceOne.getbkData();
+    }
+
+    //2019-04-12 09:21:55 format
+    @RequestMapping(method = RequestMethod.GET,value="/findByDateRange")
+    public List<BkTimeLogModel> findByDateRange(@RequestParam(name = "from_datetime") String from_datetime,@RequestParam(name = "to_datetime") String to_datetime) throws ParseException {
+        return serviceOne.findByDateRange(from_datetime,to_datetime);
     }
 
     @RequestMapping(method = RequestMethod.GET,value="/createtablebkdata")

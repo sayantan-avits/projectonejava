@@ -1,16 +1,16 @@
 package com.example.projectone.services;
 
 import com.example.projectone.model.BkTimeLogModel;
-import com.example.projectone.repositories.IBkTimeRepository;
+import com.example.projectone.repositories.BkTimeLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import com.example.projectone.Constants.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.example.projectone.Constants.*;
@@ -21,7 +21,7 @@ import static com.example.projectone.Constants.*;
 public class ServiceOne {
 
     @Autowired
-    IBkTimeRepository iBkTimeRepository;
+    BkTimeLogRepository bkTimeLogRepository;
 
     public void saveBkTimeDataToDatabase(HashMap<String,String> keyValuePair){
 
@@ -45,13 +45,19 @@ public class ServiceOne {
         //parameterHashMapArray.add(param1);
         //parameterHashMapArray
         //serviceOne.saveBkTimeDataToDatabase(bkTimeLogModel);
-        iBkTimeRepository.save(bkTimeLogModel);
-        //iBkTimeRepository.save(bkTimeLogModel);
+        bkTimeLogRepository.save(bkTimeLogModel);
+        //bkTimeLogRepository.save(bkTimeLogModel);
     }
 
     public List<BkTimeLogModel> getbkData() {
-        return iBkTimeRepository.findAll();
+        return bkTimeLogRepository.findAll();
     }
+
+    public List<BkTimeLogModel> findByDateRange(String fromDateTimeStr,String toDateTimeStr) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
+        return bkTimeLogRepository.findByDateRange(format.parse(fromDateTimeStr),format.parse(toDateTimeStr));
+    }
+
 
     /**
      * generate table dynamically. Only for Dev perpose.*/

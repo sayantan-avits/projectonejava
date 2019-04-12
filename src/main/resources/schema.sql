@@ -1,5 +1,6 @@
 CREATE TABLE bk_time_log (
   ID varchar(45) NOT NULL,
+  CREATED_AT timestamp without time zone DEFAULT NULL,
   REQST_TYPE varchar(45) DEFAULT NULL,
   PLANTID varchar(45) DEFAULT NULL,
   LINEID varchar(45) DEFAULT NULL,

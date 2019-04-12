@@ -4,15 +4,20 @@ package com.example.projectone.model;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "bk_time_log")
+@Table(name = "bk_time_log")//@NamedQuery(name = "bk_time_log.findByDateRange", query = "SELECT o FROM bk_time_log o WHERE o.created_at BETWEEN ?1 AND ?2")//"SELECT p FROM Person p WHERE LOWER(p.lastName) = LOWER(?1)")
 @EntityListeners(AuditingEntityListener.class)
 
 public class BkTimeLogModel {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
+
+
+    @Column(name="created_at", nullable=false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     private String t1,t2,t3,t4,t5,t6;
     private String reqst_type,plantid,lineid,prodid,bk_time;
@@ -24,6 +29,17 @@ public class BkTimeLogModel {
     public void setId(String id) {
         this.id = id;
     }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
+    public Date getCreateAt() {
+        return createdAt;
+    }
+    /*public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }*/
 
     public String getT1() {
         return t1;
