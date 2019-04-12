@@ -14,7 +14,7 @@ import java.util.List;
 import static com.example.projectone.Constants.*;
 
 @RestController
-@RequestMapping("bkdata")
+@RequestMapping("")
 @CrossOrigin(origins = "*")
 public class ControllerOne {
 
@@ -24,7 +24,7 @@ public class ControllerOne {
 //    @Autowired
 //    BkTimeLogRepository iBkTimeRepository;
 
-    @RequestMapping(method = RequestMethod.GET,value="/save")
+    @RequestMapping(method = RequestMethod.GET,value="bkdata/save")
     public String get(
             @RequestParam(value="RQSTTYPE", required=true) String reqstype,
             @RequestParam(value="PRODID", required=true) String prodid,
@@ -64,7 +64,7 @@ public class ControllerOne {
         s= s+"d";
     }
 
-    @RequestMapping(method = RequestMethod.GET,value="/getdata")
+    @RequestMapping(method = RequestMethod.GET,value="bkdata/getdata")
     public List<BkTimeLogModel> getbkdata(){
         return serviceOne.getbkData();
     }
@@ -82,11 +82,11 @@ public class ControllerOne {
         String DB_PASSWORD = "password";
         String TABLE_NAME = "bk_time_log";
         serviceOne.createBkTable(DB_DRIVER,DB_CONNECTION,DB_USER,DB_PASSWORD,TABLE_NAME);
-        return "Status : true";
+        return "{Status : true}";
     }
 
-    @RequestMapping(method = RequestMethod.GET,value="/connectiontest")
+    @RequestMapping(method = RequestMethod.GET,value="")
     public String  connectiontest(){
-        return "connection working";
+        return "message : \"connection working\"";
     }
 }
